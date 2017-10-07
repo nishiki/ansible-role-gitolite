@@ -11,29 +11,34 @@ None
 
 ## Role variables
 
- * gitolite_version - the gitolite version to install ([see releases](https://github.com/sitaramc/gitolite/releases))
- * gitolite_user_name - the name of the gitolite user
- * gitolite_user_uid - the uid of the gitolite user
- * gitolite_user_home - the home directory of the gitolite user
+ * `gitolite_version` - the gitolite version to install ([see releases](https://github.com/sitaramc/gitolite/releases))
+ * `gitolite_user_name` - the name of the gitolite user
+ * `gitolite_user_uid` - the uid of the gitolite user
+ * `gitolite_user_home` - the home directory of the gitolite user
 
 ## How to use
 
  * Install:
 ```
-- role: gitolite 
+- hosts: git-server
+  roles:
+    - gitolite 
 ```
 
  * Uninstall:
 ```
-- role: gitolite/uninstall
+- hosts: git-server
+  roles:
+    - gitolite/uninstall
 ```
 
  * Uninstall and purge all data:
 ```
-- role: gitolite/purge
+- hosts: git-server
+  roles:
+    - gitolite/purge
 ```
 
-## Development
 ## Development
 ### Tests with docker
 
