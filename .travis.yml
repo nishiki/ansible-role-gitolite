@@ -9,3 +9,6 @@ before_install:
 
 script:
   - rake
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
