@@ -1,0 +1,5 @@
+- name: remove /home/git
+  file:
+    path: '{{ gitolite_user_home }}'
+    state: absent
+  tags: gitolite

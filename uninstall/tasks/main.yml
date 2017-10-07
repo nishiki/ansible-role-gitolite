@@ -1,0 +1,15 @@
+- name: remove user git
+  user:
+    name: '{{ gitolite_user_name }}'
+    state: absent
+  tags: gitolite
+
+- name: remove gitolite folders
+  file:
+    path: '{{ item }}'
+    state: absent
+  with_items:
+    - /usr/src/gitolite
+    - /usr/local/gitolite
+    - /usr/local/bin/gitolite
+  tags: gitolite

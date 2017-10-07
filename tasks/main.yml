@@ -1,0 +1,54 @@
+- name: create user git
+  user:
+    name: '{{ gitolite_user_name }}'
+    uid: '{{ gitolite_user_uid }}'
+    home: '{{ gitolite_user_home }}'
+    shell: /bin/bash
+  tags: gitolite
+
+- name: download gitolite
+  git:
+    repo: https://github.com/sitaramc/gitolite.git
+    dest: /usr/src/gitolite
+    version: 'v{{ gitolite_version }}'
+  register: git
+  tags: gitolite
+
+- name: set folder attributes /usr/local/gitolite
+  file:
+    path: /usr/local/gitolite
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+  tags: gitolite
+
+- name: install gitolite
+  shell: /usr/src/gitolite/install -to /usr/local/gitolite
+  when: git.changed
+  tags: gitolite
+
+- name: create folder binary symlink
+  file:
+    src: /usr/local/gitolite/gitolite
+    dest: /usr/local/bin/gitolite
+    owner: root
+    group: root
+    state: link
+  tags: gitolite
+
+- name: create ssh key for git
+  shell: ssh-keygen -N '' -f $HOME/.ssh/gitolite
+  args:
+    creates: $HOME/.ssh/gitolite
+  become: true
+  become_user: '{{ gitolite_user_name }}'
+  tags: gitolite
+
+- name: firt setup for gitolite
+  shell: gitolite setup -pk $HOME/.ssh/gitolite.pub
+  args:
+    creates: $HOME/projects.list
+  become: true
+  become_user: '{{ gitolite_user_name }}'
+  tags: gitolite
