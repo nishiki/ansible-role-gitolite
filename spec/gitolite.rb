@@ -2,6 +2,10 @@ require 'serverspec'
 
 set :backend, :exec
 
+describe package('git') do
+  it { should be_installed }
+end
+
 describe user('git') do
   it { should exist }
   it { should have_uid 997 }

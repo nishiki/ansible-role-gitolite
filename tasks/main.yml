@@ -1,3 +1,8 @@
+- name: install git package
+  apt:
+    name: git
+  tags: gitolite
+
 - name: create user git
   user:
     name: '{{ gitolite_user_name }}'
