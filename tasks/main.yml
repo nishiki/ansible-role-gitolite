@@ -43,7 +43,7 @@
   tags: gitolite
 
 - name: create ssh key for git
-  shell: ssh-keygen -N '' -f $HOME/.ssh/gitolite
+  shell: ssh-keygen -N '' -f $HOME/.ssh/gitolite-recovery
   args:
     creates: $HOME/.ssh/gitolite
   become: true
@@ -51,7 +51,7 @@
   tags: gitolite
 
 - name: firt setup for gitolite
-  shell: gitolite setup -pk $HOME/.ssh/gitolite.pub
+  shell: gitolite setup -pk $HOME/.ssh/gitolite-recovery.pub
   args:
     creates: $HOME/projects.list
   become: true
