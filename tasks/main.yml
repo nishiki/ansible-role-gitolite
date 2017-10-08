@@ -45,7 +45,7 @@
 - name: create ssh key for git
   shell: ssh-keygen -N '' -f $HOME/.ssh/gitolite-recovery
   args:
-    creates: $HOME/.ssh/gitolite
+    creates: $HOME/.ssh/gitolite-recovery
   become: true
   become_user: '{{ gitolite_user_name }}'
   tags: gitolite
