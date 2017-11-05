@@ -1,14 +1,20 @@
 sudo: required
 language: ruby
 
+env:
+  - ANSIBLE_VERSION=2.2.3.0
+  - ANSIBLE_VERSION=2.3.2.0
+  - ANSIBLE_VERSION=2.4.0.0
 services:
   - docker
 
 before_install:
-  - docker pull nishiki/ansible:stretch
+  - bundle install
 
 script:
-  - rake
+  - kitchen conv
+  - kitchen conv | grep changed=0
+  - kitchen verify
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

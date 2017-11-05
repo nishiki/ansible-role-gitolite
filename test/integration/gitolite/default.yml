@@ -1,0 +1,4 @@
+- hosts: gitolite
+  connection: local
+  roles:
+      - ansible-role-gitolite
